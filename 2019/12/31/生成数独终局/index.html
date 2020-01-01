@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>生成数独终局 | TlsQGW100F</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="时间表2019&#x2F;12&#x2F;31完成生成数独终局部分代码 解题思路和算法简述​    相比解数独，生成终局的算法就简单很多。刚开始想凭着学了一个学期的离散数学和组合数学知识自己设计一个算法，出发点思路还是有的，就是排列组合。但是想了一会突然醒悟这是做项目不是数学题，就别跟自己过不去，于是很快在网上找到一个高效算法。 ​    对于每个要生成的终局，算法用数字1到9的一个排列作为生成排列，数独的九行序列分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="生成数独终局">
+<meta property="og:url" content="http://yoursite.com/2019/12/31/%E7%94%9F%E6%88%90%E6%95%B0%E7%8B%AC%E7%BB%88%E5%B1%80/index.html">
+<meta property="og:site_name" content="TlsQGW100F">
+<meta property="og:description" content="时间表2019&#x2F;12&#x2F;31完成生成数独终局部分代码 解题思路和算法简述​    相比解数独，生成终局的算法就简单很多。刚开始想凭着学了一个学期的离散数学和组合数学知识自己设计一个算法，出发点思路还是有的，就是排列组合。但是想了一会突然醒悟这是做项目不是数学题，就别跟自己过不去，于是很快在网上找到一个高效算法。 ​    对于每个要生成的终局，算法用数字1到9的一个排列作为生成排列，数独的九行序列分">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-12-31T14:02:37.819Z">
+<meta property="article:modified_time" content="2020-01-01T13:39:37.259Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="TlsQGW100F" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">TlsQGW100F</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-生成数独终局" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/31/%E7%94%9F%E6%88%90%E6%95%B0%E7%8B%AC%E7%BB%88%E5%B1%80/" class="article-date">
+  <time datetime="2019-12-31T14:02:37.819Z" itemprop="datePublished">2019-12-31</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      生成数独终局
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="时间表"><a href="#时间表" class="headerlink" title="时间表"></a>时间表</h3><h6 id="2019-12-31"><a href="#2019-12-31" class="headerlink" title="2019/12/31"></a>2019/12/31</h6><p>完成生成数独终局部分代码</p>
+<h3 id="解题思路和算法简述"><a href="#解题思路和算法简述" class="headerlink" title="解题思路和算法简述"></a>解题思路和算法简述</h3><p>​    相比解数独，生成终局的算法就简单很多。刚开始想凭着学了一个学期的离散数学和组合数学知识自己设计一个算法，出发点思路还是有的，就是排列组合。但是想了一会突然醒悟这是做项目不是数学题，就别跟自己过不去，于是很快在网上找到一个高效算法。</p>
+<p>​    对于每个要生成的终局，算法用数字1到9的一个排列作为生成排列，数独的九行序列分别通过将生成排列循环左移0、3、6、1、4、7、2、5、8个数字得到。在这个终局的基础上还可以通过任意交换2、3行，4、5、6行，7、8、9行得到更多终局。</p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><p>​    C++标准头文件algorithm中有能将给定序列按字典序转换成其下一个排列的函数next_permutation。不过注意到题目要求终局的第一个数字是由自己学号确定的，所以实际只能对序列的后八个数字进行操作。</p>
+<p>​    实现所需代码很短，核心部分如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> <span class="built_in">line</span>[<span class="number">9</span>][<span class="number">10</span>]; <span class="comment">//数独的9行，用字符串表示</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">9</span>; i++)</span><br><span class="line">    <span class="built_in">line</span>[i][<span class="number">9</span>] = <span class="string">'\0'</span>;</span><br><span class="line"><span class="keyword">char</span>* pline[<span class="number">9</span>]; <span class="comment">//换行时用指针交换替代赋值</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) <span class="comment">//前三行不进行交换</span></span><br><span class="line">    pline[i] = <span class="built_in">line</span>[i];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">char</span> arr[<span class="number">10</span>] = &#123; <span class="string">'4'</span>,<span class="string">'1'</span>,<span class="string">'2'</span>,<span class="string">'3'</span>,<span class="string">'5'</span>,<span class="string">'6'</span>,<span class="string">'7'</span>,<span class="string">'8'</span>,<span class="string">'9'</span>,<span class="string">'\0'</span> &#125;; <span class="comment">//初始排列</span></span><br><span class="line"><span class="keyword">int</span> offset[<span class="number">9</span>] = &#123; <span class="number">0</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">7</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">8</span> &#125;; <span class="comment">//每行相对于第一行左移的偏移量</span></span><br><span class="line"><span class="keyword">int</span> swapline[<span class="number">2</span>][<span class="number">3</span>]; <span class="comment">//交换行所用的序列</span></span><br><span class="line"><span class="keyword">while</span> (n &lt; num)</span><br><span class="line">&#123;</span><br><span class="line">    next_permutation(&amp;arr[<span class="number">1</span>], &amp;arr[<span class="number">9</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//生成排列对应的基本数独</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">9</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">9</span>; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">line</span>[i][j] = arr[(j + offset[i]) % <span class="number">9</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//在基本数独基础上对行进行交换</span></span><br><span class="line">    swapline[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">3</span>; swapline[<span class="number">0</span>][<span class="number">1</span>] = <span class="number">4</span>; swapline[<span class="number">0</span>][<span class="number">2</span>] = <span class="number">5</span>;</span><br><span class="line">    swapline[<span class="number">1</span>][<span class="number">0</span>] = <span class="number">6</span>; swapline[<span class="number">1</span>][<span class="number">1</span>] = <span class="number">7</span>; swapline[<span class="number">1</span>][<span class="number">2</span>] = <span class="number">8</span>;</span><br><span class="line">    <span class="keyword">do</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">do</span></span><br><span class="line">        &#123;</span><br><span class="line">            pline[<span class="number">3</span>] = <span class="built_in">line</span>[swapline[<span class="number">0</span>][<span class="number">0</span>]]; pline[<span class="number">4</span>] = <span class="built_in">line</span>[swapline[<span class="number">0</span>][<span class="number">1</span>]]; pline[<span class="number">5</span>] = <span class="built_in">line</span>[swapline[<span class="number">0</span>][<span class="number">2</span>]];</span><br><span class="line">            pline[<span class="number">6</span>] = <span class="built_in">line</span>[swapline[<span class="number">1</span>][<span class="number">0</span>]]; pline[<span class="number">7</span>] = <span class="built_in">line</span>[swapline[<span class="number">1</span>][<span class="number">1</span>]]; pline[<span class="number">8</span>] = <span class="built_in">line</span>[swapline[<span class="number">1</span>][<span class="number">2</span>]];</span><br><span class="line">            write_sudoku(pline, buf, pbuf);</span><br><span class="line">            n++; <span class="comment">//生成个数+1</span></span><br><span class="line">            <span class="keyword">if</span> (n &lt; num)</span><br><span class="line">            &#123;</span><br><span class="line">                buf[pbuf++] = <span class="string">'\n'</span>;</span><br><span class="line">                buf[pbuf++] = <span class="string">'\n'</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125; <span class="keyword">while</span> (next_permutation(swapline[<span class="number">1</span>], swapline[<span class="number">1</span>] + <span class="number">3</span>));</span><br><span class="line">        <span class="keyword">if</span> (n &gt;= num)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125; <span class="keyword">while</span> (next_permutation(swapline[<span class="number">0</span>], swapline[<span class="number">0</span>] + <span class="number">3</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    里面的write_sudoku函数功能是将生成的终局写入缓冲区。</p>
+<p>​    其中需要注意的是因为有换行操作，使用指针数组来指示实际的行顺序可以节省大量的赋值操作。swapline是在换行时用来指示目标行顺序，其值也可以通过next_permutation来方便地修改。为了使代码规整一些我只对3、4、5行和7、8、9行做交换处理，不过这样能产生的终局总数也能够满足项目需求。</p>
+<p>​    </p>
+<h3 id="测试和性能分析"><a href="#测试和性能分析" class="headerlink" title="测试和性能分析"></a>测试和性能分析</h3><p>​    测试的方法是将生成的数独终局输入到解数独部分的类中，并用类的相应方法检查终局正确性。</p>
+<p>​    第一次在生成一百万个终局的测试时对比其他同学的结果速度慢很多。通过VS的性能探查工具发现大部分的时间耗费在文件输出上。于是我抛弃了用fprintf逐字符输出的方式，改为申请一个足够大的缓冲区（所需大小根据目标终局数计算得到），每次生成的终局都按格式先写入缓冲区，全部生成完毕时再调用fwrite一次性写入文件。</p>
+<p>​    这样改过后一百万个终局可以在2秒内生成。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/31/%E7%94%9F%E6%88%90%E6%95%B0%E7%8B%AC%E7%BB%88%E5%B1%80/" data-id="ck4vejkc10003egv81r7bfamq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/01/01/%E6%80%BB%E7%BB%93/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          总结
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/12/25/%E8%A7%A3%E6%95%B0%E7%8B%AC/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">解数独</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/01/01/%E6%80%BB%E7%BB%93/">总结</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/31/%E7%94%9F%E6%88%90%E6%95%B0%E7%8B%AC%E7%BB%88%E5%B1%80/">生成数独终局</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/25/%E8%A7%A3%E6%95%B0%E7%8B%AC/">解数独</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/24/PSP2.1%E8%A1%A8%E6%A0%BC/">PSP2.1表格</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/24/%E4%BB%93%E5%BA%93%E5%9C%B0%E5%9D%80/">仓库地址</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

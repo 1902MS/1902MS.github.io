@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>解数独 | TlsQGW100F</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="时间表2019&#x2F;12&#x2F;25查找解数独算法，编写类Sudoku基本结构，完成算法第一个方法所需函数 2019&#x2F;12&#x2F;26完成解数独算法前两个方法，并进行测试 2019&#x2F;12&#x2F;30把常用的遍历部分代码，改写成宏定义形式 2019&#x2F;12&#x2F;31完成解算法主体 题目分析和算法查找​    项目需求有两个，生成数独和解数独，没有太多组织上难点，所以实现的工作主要是找一个比较高效的算法并用C++实现。网上粗略的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解数独">
+<meta property="og:url" content="http://yoursite.com/2019/12/25/%E8%A7%A3%E6%95%B0%E7%8B%AC/index.html">
+<meta property="og:site_name" content="TlsQGW100F">
+<meta property="og:description" content="时间表2019&#x2F;12&#x2F;25查找解数独算法，编写类Sudoku基本结构，完成算法第一个方法所需函数 2019&#x2F;12&#x2F;26完成解数独算法前两个方法，并进行测试 2019&#x2F;12&#x2F;30把常用的遍历部分代码，改写成宏定义形式 2019&#x2F;12&#x2F;31完成解算法主体 题目分析和算法查找​    项目需求有两个，生成数独和解数独，没有太多组织上难点，所以实现的工作主要是找一个比较高效的算法并用C++实现。网上粗略的">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-12-25T14:07:49.507Z">
+<meta property="article:modified_time" content="2020-01-01T12:51:20.587Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="TlsQGW100F" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">TlsQGW100F</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-解数独" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/25/%E8%A7%A3%E6%95%B0%E7%8B%AC/" class="article-date">
+  <time datetime="2019-12-25T14:07:49.507Z" itemprop="datePublished">2019-12-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      解数独
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="时间表"><a href="#时间表" class="headerlink" title="时间表"></a>时间表</h3><h6 id="2019-12-25"><a href="#2019-12-25" class="headerlink" title="2019/12/25"></a>2019/12/25</h6><p>查找解数独算法，编写类Sudoku基本结构，完成算法第一个方法所需函数</p>
+<h6 id="2019-12-26"><a href="#2019-12-26" class="headerlink" title="2019/12/26"></a>2019/12/26</h6><p>完成解数独算法前两个方法，并进行测试</p>
+<h6 id="2019-12-30"><a href="#2019-12-30" class="headerlink" title="2019/12/30"></a>2019/12/30</h6><p>把常用的遍历部分代码，改写成宏定义形式</p>
+<h6 id="2019-12-31"><a href="#2019-12-31" class="headerlink" title="2019/12/31"></a>2019/12/31</h6><p>完成解算法主体</p>
+<h3 id="题目分析和算法查找"><a href="#题目分析和算法查找" class="headerlink" title="题目分析和算法查找"></a>题目分析和算法查找</h3><p>​    项目需求有两个，生成数独和解数独，没有太多组织上难点，所以实现的工作主要是找一个比较高效的算法并用C++实现。网上粗略的浏览一下发现解数独比生成数独要麻烦得多，因此决定从解数独部分开始做。</p>
+<p>​    要做数独第一个想到的就是回溯法，网上随便查一查也多是使用回溯法，但是这种最普通的回溯法不管时间还是空间复杂度都太高了，直接否决。最后找到一篇博文，里面的算法似乎是博主自己写的，性能在我看来算是很可观的，因此决定采用。</p>
+<p>​    博文网址：<a href="http://yshblog.com/blog/74" target="_blank" rel="noopener">http://yshblog.com/blog/74</a></p>
+<h3 id="算法概要"><a href="#算法概要" class="headerlink" title="算法概要"></a>算法概要</h3><p>​    这个算法本质也是回溯法，但是通过充分利用已知信息结合数独规则来排除大量的候选项和选择回溯的扩展方向，使得回溯的次数大大减少。</p>
+<p>​    算法确定单元格值的基本方式是：为所有空单元格建立候选值列表，初始为1到9，然后通过已知的信息逐一排除，直到只剩一个候选值就可以确定。排除候选项的方法有三种，我认为在已有前两种的基础上加入第三种的性能收益不是很明显，因此只实现了前两种方法。</p>
+<p>​    第一种就是数独规则最直观的用法：如果一个单元格的值已确定，那么其所在行、列、九宫格内的空单元格候选列表中相应的值就可以排除。</p>
+<p>​    第二种是将有约束关系的单元格信息放在一起看：如果同一行、同一列或同一个九宫格里某个值只在其中一个单元格里出现（即非空单元格值或空单元格列表），那么就可以确定这个单元格取值。</p>
+<p>​    在使用上述两种方法排除过程中可能会使得非空单元格的值被确定，新确定的单元格的信息也能被用于进一步排除。因此建立一个队列，一旦一个单元格被确定就将其压入队列。首先循环使用第一种方法直至队列为空，然后使用第二种方法处理，处理后如果队列不空再转上一步。</p>
+<p>​    一些简单的数独经过上面的处理已经能被解出，若还有空单元格才进入回溯主体：选择一个单元格，依次检查它的每个值假定选定该值，用上面的方法处理后如果还有空单元格就再选择一个同样操作；如果一个单元格的所有值都不能导出解就回溯。回溯时为了选择最有利的扩展方向要对单元格进行评分，然后选择评分最高的单元格，评分=(10-候选个数) + 同行确定数字个数 + 同列确定数字个数。</p>
+<h3 id="数据结构和实现"><a href="#数据结构和实现" class="headerlink" title="数据结构和实现"></a>数据结构和实现</h3><p>​    为了方便操作还是将解数独部分封装成一个类 。表示数独的基本数据结构如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//3x3单元格阵列</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Matrix</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> matrix[<span class="number">4</span>][<span class="number">4</span>][<span class="number">10</span>]; <span class="comment">//3x3矩阵，0号行列不用，每个单元格[0]表示确定值，[1:9]为候选值列表</span></span><br><span class="line">	<span class="keyword">int</span> listsize[<span class="number">4</span>][<span class="number">4</span>]; <span class="comment">//对应单元格列表长度，0表示已确定</span></span><br><span class="line">&#125;Matrix;</span><br><span class="line"></span><br><span class="line"><span class="comment">//数独盘,3x3九宫格阵列，0号行列不用</span></span><br><span class="line">Matrix S[<span class="number">4</span>][<span class="number">4</span>];</span><br></pre></td></tr></table></figure>
+<p>​    这两个数据结构基本保存了数独的全部信息，除此之外还加入了一个整数属性uncomfirmed，维护其计数未确定单元格数量，在跳过无用操作和判断数独是否完成时很方便。</p>
+<p>​    类的核心方法就是实现前面所讲的算法，关键在于正确操纵上述数据结构。</p>
+<p>​    为了使得代码更加简洁易读我把其中常用的遍历循环控制（如遍历行、列、九宫格）都写成宏，如下面的宏就是遍历数独的每一行：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//遍历每行</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FOR_EACH_R(fun)	for (int Sr = 1; Sr &lt;= 3; Sr++)		\</span></span><br><span class="line">						&#123;									\</span><br><span class="line">							<span class="keyword">for</span> (<span class="keyword">int</span> r = <span class="number">1</span>; r &lt;= <span class="number">3</span>; r++)	\</span><br><span class="line">							&#123;								\</span><br><span class="line">								fun							\</span><br><span class="line">							&#125;								\</span><br><span class="line">						&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    使用时如下:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//检查每行</span></span><br><span class="line">	FOR_EACH_R</span><br><span class="line">	(</span><br><span class="line">		<span class="built_in">memset</span>(occ, <span class="literal">false</span>, <span class="number">10</span> * <span class="keyword">sizeof</span>(<span class="keyword">bool</span>));</span><br><span class="line">		FOR_EACH_C</span><br><span class="line">		(</span><br><span class="line">			<span class="keyword">int</span> val = S[Sr][Sc].matrix[r][c][<span class="number">0</span>];</span><br><span class="line">			<span class="keyword">if</span> (val == <span class="number">0</span> || occ[val]) <span class="comment">//值为0或已出现过</span></span><br><span class="line">			&#123;</span><br><span class="line">				right = <span class="literal">false</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				occ[val] = <span class="literal">true</span>;</span><br><span class="line">		)</span><br><span class="line">		<span class="keyword">if</span> (!right)</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">	)</span><br></pre></td></tr></table></figure>
+
+<p>​    主体流程图如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">st&#x3D;&gt;start: 开始</span><br><span class="line">e&#x3D;&gt;end: 结束</span><br><span class="line">op1&#x3D;&gt;operation: 输入数独，初始化空单元格候选列表，非空单元格入队</span><br><span class="line">op2&#x3D;&gt;operation: 处理队列</span><br><span class="line">op3&#x3D;&gt;operation: 选取评分最高的点</span><br><span class="line">op4&#x3D;&gt;operation: 回溯</span><br><span class="line"></span><br><span class="line">st-&gt;op1-&gt;op2-&gt;op3-&gt;op4-&gt;e</span><br></pre></td></tr></table></figure>
+
+<p>​    处理队列流程图如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">st&#x3D;&gt;start: 开始</span><br><span class="line">e&#x3D;&gt;end: 结束</span><br><span class="line">cond1&#x3D;&gt;condition: 队列是否为空</span><br><span class="line">cond2&#x3D;&gt;condition: 队列是否为空</span><br><span class="line">cond3&#x3D;&gt;condition: 是否有未确定单元格</span><br><span class="line">cond4&#x3D;&gt;condition: 是否有未确定单元格</span><br><span class="line">op1&#x3D;&gt;operation: 弹出一个元素</span><br><span class="line">op2&#x3D;&gt;operation: 对该元素使用方法一处理</span><br><span class="line">op3&#x3D;&gt;operation: 对每行、每列、每个九宫格用方法二处理</span><br><span class="line"></span><br><span class="line">st-&gt;cond1</span><br><span class="line">cond1(yes)-&gt;e</span><br><span class="line">cond1(no,buttom)-&gt;cond2</span><br><span class="line">cond2(yes)-&gt;cond4</span><br><span class="line">cond2(no,buttom)-&gt;cond3</span><br><span class="line">cond3(no,left)-&gt;cond2</span><br><span class="line">cond3(yes,buttom)-&gt;op1-&gt;op2(left)-&gt;cond2</span><br><span class="line">cond4(no)-&gt;cond1</span><br><span class="line">cond4(yes,right)-&gt;op3(right)-&gt;cond1</span><br></pre></td></tr></table></figure>
+
+<p>​    回溯流程图如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">st&#x3D;&gt;start: 开始</span><br><span class="line">e&#x3D;&gt;end: 结束</span><br><span class="line">cond1&#x3D;&gt;condition: 该单元格是否有候选值未检查</span><br><span class="line">cond2&#x3D;&gt;condition: 数独是否正确</span><br><span class="line">cond3&#x3D;&gt;condition: 是否有未确定单元格</span><br><span class="line">cond4&#x3D;&gt;condition: 数独是否完成</span><br><span class="line">op1&#x3D;&gt;operation: 选取一个未检查的候选值</span><br><span class="line">op2&#x3D;&gt;operation: 将单元格取定该值并入队</span><br><span class="line">op3&#x3D;&gt;operation: 处理队列</span><br><span class="line">op4&#x3D;&gt;operation: 选择评分最高的单元格</span><br><span class="line">op5&#x3D;&gt;operation: 回溯</span><br><span class="line">op6&#x3D;&gt;operation: 还原数独盘到该单元格未确定状态</span><br><span class="line"></span><br><span class="line">st-&gt;cond1</span><br><span class="line">cond1(no)-&gt;e</span><br><span class="line">cond1(yes)-&gt;op1-&gt;op2-&gt;op3-&gt;cond2</span><br><span class="line">cond2(yes)-&gt;e</span><br><span class="line">cond2(no,buttom)-&gt;cond3</span><br><span class="line">cond3(no)-&gt;op6</span><br><span class="line">cond3(yes)-&gt;op4-&gt;op5-&gt;cond4</span><br><span class="line">cond4(yes)-&gt;e</span><br><span class="line">cond4(no,buttom)-&gt;op6</span><br><span class="line">op6(left)-&gt;cond1</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="测试和性能分析"><a href="#测试和性能分析" class="headerlink" title="测试和性能分析"></a>测试和性能分析</h3><p>​    在类里我写了一个调试专用的输出方法，可以按照九宫格的结构把单元格值和候选列表打印在控制台，在代码编写过程中我主要使用这个方法来验证正确性。每次完成算法的一部分时都先进行测试，通过后才进行下一步。</p>
+<p>​    算法完成后测试了一下，解1000个数独花了1秒多感觉还可以，用vs的性能探查器看了一下也没有什么异常的地方。在之前查找算法的时候瞄了一眼看到有人说到输入输出耗时的问题，不过因为我已经在之前做过的项目里踩过这个坑，所以这次从一开始就采用了将整个文件读入到缓冲区再提取信息的方式，从而避免了fscanf之类的函数带来的性能瓶颈。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/25/%E8%A7%A3%E6%95%B0%E7%8B%AC/" data-id="ck4vejkc30004egv8bew187bm" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/12/31/%E7%94%9F%E6%88%90%E6%95%B0%E7%8B%AC%E7%BB%88%E5%B1%80/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          生成数独终局
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/12/24/PSP2.1%E8%A1%A8%E6%A0%BC/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">PSP2.1表格</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/01/01/%E6%80%BB%E7%BB%93/">总结</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/31/%E7%94%9F%E6%88%90%E6%95%B0%E7%8B%AC%E7%BB%88%E5%B1%80/">生成数独终局</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/25/%E8%A7%A3%E6%95%B0%E7%8B%AC/">解数独</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/24/PSP2.1%E8%A1%A8%E6%A0%BC/">PSP2.1表格</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/24/%E4%BB%93%E5%BA%93%E5%9C%B0%E5%9D%80/">仓库地址</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
