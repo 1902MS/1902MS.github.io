@@ -112,25 +112,72 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//检查每行</span></span><br><span class="line">	FOR_EACH_R</span><br><span class="line">	(</span><br><span class="line">		<span class="built_in">memset</span>(occ, <span class="literal">false</span>, <span class="number">10</span> * <span class="keyword">sizeof</span>(<span class="keyword">bool</span>));</span><br><span class="line">		FOR_EACH_C</span><br><span class="line">		(</span><br><span class="line">			<span class="keyword">int</span> val = S[Sr][Sc].matrix[r][c][<span class="number">0</span>];</span><br><span class="line">			<span class="keyword">if</span> (val == <span class="number">0</span> || occ[val]) <span class="comment">//值为0或已出现过</span></span><br><span class="line">			&#123;</span><br><span class="line">				right = <span class="literal">false</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				occ[val] = <span class="literal">true</span>;</span><br><span class="line">		)</span><br><span class="line">		<span class="keyword">if</span> (!right)</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">	)</span><br></pre></td></tr></table></figure>
 
 <p>​    主体流程图如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">st&#x3D;&gt;start: 开始</span><br><span class="line">e&#x3D;&gt;end: 结束</span><br><span class="line">op1&#x3D;&gt;operation: 输入数独，初始化空单元格候选列表，非空单元格入队</span><br><span class="line">op2&#x3D;&gt;operation: 处理队列</span><br><span class="line">op3&#x3D;&gt;operation: 选取评分最高的点</span><br><span class="line">op4&#x3D;&gt;operation: 回溯</span><br><span class="line"></span><br><span class="line">st-&gt;op1-&gt;op2-&gt;op3-&gt;op4-&gt;e</span><br></pre></td></tr></table></figure>
+<div id="flowchart-0" class="flow-chart"></div>
 
 <p>​    处理队列流程图如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">st&#x3D;&gt;start: 开始</span><br><span class="line">e&#x3D;&gt;end: 结束</span><br><span class="line">cond1&#x3D;&gt;condition: 队列是否为空</span><br><span class="line">cond2&#x3D;&gt;condition: 队列是否为空</span><br><span class="line">cond3&#x3D;&gt;condition: 是否有未确定单元格</span><br><span class="line">cond4&#x3D;&gt;condition: 是否有未确定单元格</span><br><span class="line">op1&#x3D;&gt;operation: 弹出一个元素</span><br><span class="line">op2&#x3D;&gt;operation: 对该元素使用方法一处理</span><br><span class="line">op3&#x3D;&gt;operation: 对每行、每列、每个九宫格用方法二处理</span><br><span class="line"></span><br><span class="line">st-&gt;cond1</span><br><span class="line">cond1(yes)-&gt;e</span><br><span class="line">cond1(no,buttom)-&gt;cond2</span><br><span class="line">cond2(yes)-&gt;cond4</span><br><span class="line">cond2(no,buttom)-&gt;cond3</span><br><span class="line">cond3(no,left)-&gt;cond2</span><br><span class="line">cond3(yes,buttom)-&gt;op1-&gt;op2(left)-&gt;cond2</span><br><span class="line">cond4(no)-&gt;cond1</span><br><span class="line">cond4(yes,right)-&gt;op3(right)-&gt;cond1</span><br></pre></td></tr></table></figure>
+<div id="flowchart-1" class="flow-chart"></div>
 
 <p>​    回溯流程图如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">st&#x3D;&gt;start: 开始</span><br><span class="line">e&#x3D;&gt;end: 结束</span><br><span class="line">cond1&#x3D;&gt;condition: 该单元格是否有候选值未检查</span><br><span class="line">cond2&#x3D;&gt;condition: 数独是否正确</span><br><span class="line">cond3&#x3D;&gt;condition: 是否有未确定单元格</span><br><span class="line">cond4&#x3D;&gt;condition: 数独是否完成</span><br><span class="line">op1&#x3D;&gt;operation: 选取一个未检查的候选值</span><br><span class="line">op2&#x3D;&gt;operation: 将单元格取定该值并入队</span><br><span class="line">op3&#x3D;&gt;operation: 处理队列</span><br><span class="line">op4&#x3D;&gt;operation: 选择评分最高的单元格</span><br><span class="line">op5&#x3D;&gt;operation: 回溯</span><br><span class="line">op6&#x3D;&gt;operation: 还原数独盘到该单元格未确定状态</span><br><span class="line"></span><br><span class="line">st-&gt;cond1</span><br><span class="line">cond1(no)-&gt;e</span><br><span class="line">cond1(yes)-&gt;op1-&gt;op2-&gt;op3-&gt;cond2</span><br><span class="line">cond2(yes)-&gt;e</span><br><span class="line">cond2(no,buttom)-&gt;cond3</span><br><span class="line">cond3(no)-&gt;op6</span><br><span class="line">cond3(yes)-&gt;op4-&gt;op5-&gt;cond4</span><br><span class="line">cond4(yes)-&gt;e</span><br><span class="line">cond4(no,buttom)-&gt;op6</span><br><span class="line">op6(left)-&gt;cond1</span><br></pre></td></tr></table></figure>
+<div id="flowchart-2" class="flow-chart"></div>
 
 
 
 
 
 <h3 id="测试和性能分析"><a href="#测试和性能分析" class="headerlink" title="测试和性能分析"></a>测试和性能分析</h3><p>​    在类里我写了一个调试专用的输出方法，可以按照九宫格的结构把单元格值和候选列表打印在控制台，在代码编写过程中我主要使用这个方法来验证正确性。每次完成算法的一部分时都先进行测试，通过后才进行下一步。</p>
-<p>​    算法完成后测试了一下，解1000个数独花了1秒多感觉还可以，用vs的性能探查器看了一下也没有什么异常的地方。在之前查找算法的时候瞄了一眼看到有人说到输入输出耗时的问题，不过因为我已经在之前做过的项目里踩过这个坑，所以这次从一开始就采用了将整个文件读入到缓冲区再提取信息的方式，从而避免了fscanf之类的函数带来的性能瓶颈。</p>
+<p>​    算法完成后测试了一下，解1000个数独花了1秒多感觉还可以，用vs的性能探查器看了一下也没有什么异常的地方。在之前查找算法的时候瞄了一眼看到有人说到输入输出耗时的问题，不过因为我已经在之前做过的项目里踩过这个坑，所以这次从一开始就采用了将整个文件读入到缓冲区再提取信息的方式，从而避免了fscanf之类的函数带来的性能瓶颈。<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">st=>start: 开始
+e=>end: 结束
+op1=>operation: 输入数独，初始化空单元格候选列表，非空单元格入队
+op2=>operation: 处理队列
+op3=>operation: 选取评分最高的点
+op4=>operation: 回溯
+
+st->op1->op2->op3->op4->e</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script><textarea id="flowchart-1-code" style="display: none">st=>start: 开始
+e=>end: 结束
+cond1=>condition: 队列是否为空
+cond2=>condition: 队列是否为空
+cond3=>condition: 是否有未确定单元格
+cond4=>condition: 是否有未确定单元格
+op1=>operation: 弹出一个元素
+op2=>operation: 对该元素使用方法一处理
+op3=>operation: 对每行、每列、每个九宫格用方法二处理
+
+st->cond1
+cond1(yes)->e
+cond1(no,buttom)->cond2
+cond2(yes)->cond4
+cond2(no,buttom)->cond3
+cond3(no,left)->cond2
+cond3(yes,buttom)->op1->op2(left)->cond2
+cond4(no)->cond1
+cond4(yes,right)->op3(right)->cond1</textarea><textarea id="flowchart-1-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-1-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-1-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-1", options);</script><textarea id="flowchart-2-code" style="display: none">st=>start: 开始
+e=>end: 结束
+cond1=>condition: 该单元格是否有候选值未检查
+cond2=>condition: 数独是否正确
+cond3=>condition: 是否有未确定单元格
+cond4=>condition: 数独是否完成
+op1=>operation: 选取一个未检查的候选值
+op2=>operation: 将单元格取定该值并入队
+op3=>operation: 处理队列
+op4=>operation: 选择评分最高的单元格
+op5=>operation: 回溯
+op6=>operation: 还原数独盘到该单元格未确定状态
+
+st->cond1
+cond1(no)->e
+cond1(yes)->op1->op2->op3->cond2
+cond2(yes)->e
+cond2(no,buttom)->cond3
+cond3(no)->op6
+cond3(yes)->op4->op5->cond4
+cond4(yes)->e
+cond4(no,buttom)->op6
+op6(left)->cond1</textarea><textarea id="flowchart-2-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-2-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-2-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-2", options);</script></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/25/%E8%A7%A3%E6%95%B0%E7%8B%AC/" data-id="ck4vejkc30004egv8bew187bm" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/25/%E8%A7%A3%E6%95%B0%E7%8B%AC/" data-id="ck4veqhw80004scv819uc5s9g" class="article-share-link">Share</a>
       
       
     </footer>
